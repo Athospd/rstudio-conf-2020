@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>wavesurfer</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="School of Engineering - University of São Paulo" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css\custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# wavesurfer
+## Athos Petri Damiani
+### School of Engineering - University of São Paulo
+### rstudio::conf 2020
+
+---
+
+
+
+
+## About me and my work
+
+.pull-left[
+
+Athos Damiani, 31, Statistician from University of São Paulo, Brazil. R user since 2009. 
+&lt;hr/&gt;
+Currently working on my Master's on the theme:
+
+&lt;div align="center"&gt;
+&lt;strong style = "color: red"&gt;Automatic Bird Species Recognition Based on Their Songs&lt;/strong&gt;
+&lt;/div&gt;
+
+.small[
+- Approach: Supervised Machine Learning
+- Orientator: Prof. Doctor Linilson R. Padovese
+- Co-orientator: Prof. Doctor Paulo Hubert
+]
+]
+
+.pull-right[
+
+![aplicacao_corujas](img/aplicacao_corujas3.png)
+
+]
+
+---
+
+## Motivation
+
+
+![aplicacao_corujas](img/abismo1.png)
+
+
+---
+
+## Motivation
+
+
+![aplicacao_corujas](img/abismo2.png)
+
+
+---
+
+## wavesurfer.js
+
+![](img/github_wavesurfer.png)
+
+#### "A customizable audio waveform visualization, built on top of Web Audio API and HTML5 Canvas."
+
+![](img/exemplos_wavesurfer.png)
+
+
+
+
+---
+
+## library(wavesurfer)
+
+HTML widget for wavesurfer.js
+
+
+```r
+# shiny UI
+
+wavesurfer("wavs_folder/wav_file.wav") %&gt;% # or .mp3
+* ws_annotator(labels = c("birdsong", "silence", "insect")) %&gt;%
+  ws_minimap() %&gt;%
+  ws_cursor()
+```
+
+![](img/saida_wavesurfer1.png)
+
+---
+
+## library(wavesurfer)
+
+HTML widget for wavesurfer.js
+
+
+```r
+# shiny UI
+
+wavesurfer(
+  "wavs_folder/wav_file.wav", # or .mp3
+* visualization = 'spectrogram'
+) %&gt;%
+  ws_annotator(labels = c("birdsong", "silence", "insect")) %&gt;% 
+  ws_minimap() %&gt;%
+  ws_cursor()
+```
+
+![](img/saida_wavesurfer2.png)
+
+---
+
+## annotator_app()
+
+Built-in shiny app for audio annotation.
+
+.pull-left[
+
+```r
+annotator_app(
+  "path/to/wav/files",
+  "path/to/store/annotations"
+)
+```
+
+### RDS layout (each row is a region)
+
+&lt;table class="table" style="font-size: 13px; width: auto !important; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; audio_id &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; region_id &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; start &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; end &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; label &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Glaucidium-minutissimum-13099.wav &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8ps588 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Glaucidium-minutissimum &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Glaucidium-minutissimum-13099.wav &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; mm467 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Glaucidium-minutissimum &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Glaucidium-minutissimum-13099.wav &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 5t5hng &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.9 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Glaucidium-minutissimum &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+]
+
+.pull-right[
+![](img/folders.png)
+]
+
+
+---
+
+## annotator_app()
+
+![](img/annotator_app1.png)
+
+
+---
+
+## annotator_app()
+
+![](img/annotator_app8.png)
+
+
+---
+
+## annotator_app()
+
+![](img/annotator_app3.png)
+
+---
+
+## annotator_app()
+
+![](img/annotator_app4.png)
+---
+
+## annotator_app()
+
+![](img/annotator_app5.png)
+
+---
+
+## annotator_app()
+
+![](img/annotator_app6.png)
+
+
+---
+
+## annotator_app()
+
+![](img/annotator_app7.png)
+
+powered by `warbleR::auto_detec()`
+
+---
+
+## annotator_app()
+
+pros
+
+- Built in shiny for a better UX
+- One can build a collaborative annotation app
+- Two inputs (two folders)
+- helper features like region suggestor (powered by `warbleR::auto_detec`)
+
+cons
+
+- X axis annotation only
+- Need of shiny skills for fancier ideas
+
+
+---
+class: center, middle, inverse
+
+## Thank You Very Much!
+
+[<i class="fab fa-github"></i> `Athospd/wavesurfer`](http://github.com/Athospd/wavesurfer)
+
+<i class="fab fa-twitter"></i> `@athos_damiani`
+
+<i class="fa fa-envelope"></i> `athos_damiani@curso-r.com`
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
